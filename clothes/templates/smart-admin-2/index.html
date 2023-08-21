@@ -341,23 +341,21 @@
                                             <td >Name</td>
                                             <td>
                                             <!-- <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white"> -->
-                                               {{template}}         
+                                               {{template.name}}         
                                             <!-- </a> -->
                                             </td>
+                                            <td></td>
                                             
                                         </tr>
                                         <tr>
                                             <td >Thumbnail</td>
                                             <td>
-                                                {% if user.name %}
-                                                    <!-- <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white"> -->
-                                                    {{user.name}}         
-                                                    <!-- </a> -->
-                                                {% else %}
-                                                    <!-- <a href="javascript:void(0);" title="Change User Name" class="btn bg-color-teal txt-color-white"> -->
-                                                    Not Set
-                                                    <!-- </a> -->
-                                                {% endif %}
+                                                <img src="/media/{{template.file_path}}" width="100%">
+                                                
+                                                
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white">Change Template</a>
                                             </td>
                                             
                                         </tr>
@@ -508,6 +506,98 @@
 
                     </div>
                     <!-- end widget -->
+
+                    <div class="jarviswidget  jarviswidget-color-yellow" id="wid-id-1" 
+                        data-widget-colorbutton="false"	                            
+                        data-widget-custombutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-editbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                            <h2>Agency</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body ">
+
+                                <table class="table" >
+                                            
+                                    <tbody>
+                                        <tr>
+                                            <td >Name</td>
+                                            <td>
+                                                {% for i in agency %}                                                    
+                                                    {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
+                                                        {% for k in j %}
+                                                            {% if k.agency_id == i.id %}
+                                                                <li>
+                                                                    <span><i class="fa fa-clock-o"></i> 
+                                                                        Service: 
+                                                                            <strong>{{k.get_kind_display}}</strong>, 
+                                                                            expired: {{k.expired_date}}
+                                                                        </span> 
+                                                                        <!-- &ndash; Site: 
+                                                                            <a href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{k.site}}" 
+                                                                            title="{% if request.is_secure %}https://{% else %}http://{% endif %}{{k.site}}"
+                                                                            target="_blank" id="current_site">
+                                                                                    {{k.site}}                                                                                                                                                                                        
+                                                                            </a>                                                                 
+                                                                        -->
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td >Thumbnail</td>
+                                            <td>
+                                                <img src="/media/{{template.file_path}}" width="100%">
+                                                
+                                                
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white">Change Template</a>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
         
                 </article>
                 <!-- WIDGET END -->                
