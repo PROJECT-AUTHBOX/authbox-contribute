@@ -350,12 +350,15 @@
                                         <tr>
                                             <td >Thumbnail</td>
                                             <td>
-                                                <img src="/media/{{template.file_path}}" width="100%">
-                                                
+                                                {% if template.file_path %}
+                                                    <img src="/media/{{template.file_path}}" width="100%">
+                                                {% else %}
+                                                    No Image
+                                                {% endif %}
                                                 
                                             </td>
                                             <td>
-                                                <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white">Change Template</a>
+                                                <a href="javascript:void(0);" onclick="fiture_not_ready()" class="btn bg-color-teal txt-color-white">Change Template</a>
                                             </td>
                                             
                                         </tr>
@@ -428,7 +431,7 @@
                                             
                                             <tbody>
                                                 <tr>
-                                                    <td >ID</td>
+                                                    <td width="20%">ID</td>
                                                     <td>
                                                     <!-- <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white"> -->
                                                        {{user.email}}         
@@ -491,6 +494,7 @@
                                                     
                                                 </tr>
                                                 
+                                                
                                             </tbody>
                                         </table>
                                         
@@ -548,43 +552,70 @@
                                             
                                     <tbody>
                                         <tr>
-                                            <td >Name</td>
+                                            <td width="20%">Name</td>
                                             <td>
-                                                {% for i in agency %}                                                    
+                                                {% for i in agency %}   
+                                                    <a href="javascript:void(0);" 
+                                                        title="Change Agency Name"
+                                                        class="btn bg-color-teal txt-color-white" 
+                                                        onclick="fiture_not_ready()">    
+                                                    {{i.name}}                                                                                                     
+                                                    </a>
+                                                {% endfor %}
+                                            </td>                                                                                        
+                                        </tr>
+                                        <tr>
+                                            <td >Code</td>
+                                            <td>
+                                                {% for i in agency %} 
+                                                    <a href="javascript:void(0);" 
+                                                        title="Copy Agency Code"
+                                                        class="btn bg-color-teal txt-color-white" 
+                                                        onclick="fiture_not_ready()">    
+                                                        {{i.shortuuid}}                                          
+                                                    </a>                                                           
+                                                {% endfor %}
+                                            </td>                                                                                        
+                                        </tr>      
+                                        <tr>
+                                            <td >Service</td>
+                                            <td>
+                                                {% for i in agency %}   
                                                     {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
                                                         {% for k in j %}
                                                             {% if k.agency_id == i.id %}
-                                                                <li>
-                                                                    <span><i class="fa fa-clock-o"></i> 
-                                                                        Service: 
-                                                                            <strong>{{k.get_kind_display}}</strong>, 
-                                                                            expired: {{k.expired_date}}
-                                                                        </span> 
-                                                                        <!-- &ndash; Site: 
-                                                                            <a href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{k.site}}" 
-                                                                            title="{% if request.is_secure %}https://{% else %}http://{% endif %}{{k.site}}"
-                                                                            target="_blank" id="current_site">
-                                                                                    {{k.site}}                                                                                                                                                                                        
-                                                                            </a>                                                                 
-                                                                        -->
-                                                                </li>
+                                                                
+                                                                            {{k.get_kind_display}}
+                                                                        
+                                                                        
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endfor %}
                                                 {% endfor %}
-                                            </td>
-                                            
-                                            
-                                        </tr>
+                                            </td>                                                                                        
+                                        </tr>             
                                         <tr>
-                                            <td >Thumbnail</td>
+                                            <td >Expired</td>
                                             <td>
-                                                <img src="/media/{{template.file_path}}" width="100%">
-                                                
-                                                
-                                            </td>
+                                                {% for i in agency %}   
+                                                    {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
+                                                        {% for k in j %}
+                                                            {% if k.agency_id == i.id %}
+                                                                                  
+                                                                            {{k.expired_date}}
+                                                                      
+                                                                        
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </td>                                                                                        
+                                        </tr>   
+                                        
+                                        <tr>
+                                            <td >User</td>
                                             <td>
-                                                <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white">Change Template</a>
+                                               1
                                             </td>
                                             
                                         </tr>
@@ -741,6 +772,11 @@
 
 {% block extra_body %}
     <script type="text/javascript"> 
+
+        function fiture_not_ready() {
+            alert('Fiture belum siap!');
+        };
+
         // Monthly = 4
         // Weekly = 3
         // Daily = 2
