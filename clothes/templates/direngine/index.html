@@ -105,13 +105,14 @@
 {% endblock %}
 
 {% block why-us %}
-    <section class="ftco-section services-section bg-light" >
+    <section class="ftco-section services-section bg-light" style="padding: 7em 0 0;" >
         <div class="container">
         <div class="row d-flex">
             
             {% for i in whyus %}
                 <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                    <div class="media block-6 services d-block text-center">
+                    <div class="media services block-6 d-block text-center"> 
+                        <!--  -->
                         <div class="d-flex justify-content-center"><div class="icon">
                             <span class="{{i.icon}}"></span></div></div>
                         <div class="media-body p-2 mt-2">
@@ -155,15 +156,16 @@
 {% endblock %}
 
 {% block fasilities %}
+    <span id="about">&nbsp;</span>
     
-    <section class="ftco-section ftco-destination" id="about">
+    <section class="ftco-section ftco-destination" >
         <div class="container">
             {% for i in fasilities|slice:":1" %}
                 
                 <div class="row justify-content-start ">
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">About</span>
-                        <h2 class="mb-4"><strong>Narvik Villa</strong> {{i.title}}</h2>
+                        <span class="subheading">{{i.title}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
                     
                     </div>    
                 </div>
@@ -289,14 +291,16 @@
 {% endblock %}
 
 {% block gallery %}
-    <section class="ftco-section ftco-destination" id="gallery">
+    <span id="gallery">&nbsp;</span>
+
+    <section class="ftco-section ftco-destination">
         <div class="container">
 
             {% for i in photogallery|slice:":1" %}
                 <div class="row justify-content-start ">
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">Gallery</span>
-                        <h2 class="mb-4"><strong>Narvik Villa</strong> {{i.title}}</h2>
+                        <span class="subheading">{{i.title}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
                     
                     </div>
                 
@@ -407,13 +411,15 @@
 {% endblock %}
 
 {% block special-offers %}
+    <span id="offers">&nbsp;</span>
+
     <section class="ftco-section" id="offers">
         <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
                 {% for i in offers|slice:":1" %}
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">Special Offers</span>
-                        <h2 class="mb-4"><strong>Narvik Villa</strong> {{i.title}}</h2>
+                        <span class="subheading">{{i.title}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
                     </div>
                 {% endfor %}
             </div>    		
@@ -604,7 +610,9 @@
 {% endblock %}
 
 {% block calendar %}    
-    <section class="ftco-section ftco-destination" id="calendar-scroll">
+    <span id="calendar-scroll">&nbsp;</span>
+
+    <section class="ftco-section ftco-destination" >
         <div class="container">
             <div class="row justify-content-start ">
             <div class="col-md-7 heading-section ftco-animate">
