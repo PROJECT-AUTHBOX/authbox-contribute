@@ -540,73 +540,103 @@
     </section>
 {% endblock %}
 
+{% block aboutus %}    
+    <div class="col-md-5 heading-section ftco-animate">
+        {% for i in aboutus|slice:":1" %}
+            <span class="subheading">{{i.sub_title}}</span>
+            <h2 class="mb-4 pb-3">{{i.title|safe}}</h2>
+            <!-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p> -->
+            {{i.content|safe}}
+            <a href="{{i.slug}}" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3" style="margin-left:0px">Read more</a>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {% block testimony %}
-    <section class="ftco-section testimony-section bg-light">
-        <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-md-5 heading-section ftco-animate">
-                <span class="subheading">Best Directory Website</span>
-            <h2 class="mb-4 pb-3"><strong>Why</strong> Choose Us?</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a></p>
-            </div>
-                    <div class="col-md-1"></div>
-            <div class="col-md-6 heading-section ftco-animate">
-                <span class="subheading">Testimony</span>
-            <h2 class="mb-4 pb-3"><strong>Our</strong> Guests Says</h2>
-                <div class="row ftco-animate">
-                    <div class="col-md-12">
-                    <div class="carousel-testimony owl-carousel">
+    <div class="col-md-6 heading-section ftco-animate">
+        {% for i in testimony|slice:":1" %}
+            <span class="subheading">{{i.subtitle}}</span>
+            <h2 class="mb-4 pb-3">{{i.title|safe}}</h2>
+        {% endfor %}
+
+            <div class="row ftco-animate">
+                <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    {% for i in testimony|slice:"1:" %}
                         <div class="item">
-                        <div class="testimony-wrap d-flex">
-                            <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_1.jpg' %})">
-                            <span class="quote d-flex align-items-center justify-content-center">
-                                <i class="icon-quote-left"></i>
-                            </span>
-                            </div>
-                            <div class="text ml-md-4">
-                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                            <p class="name">Dennis Green</p>
-                            <span class="position">Guest from italy</span>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="item">
-                        <div class="testimony-wrap d-flex">
-                            <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_2.jpg' %})">
-                            <span class="quote d-flex align-items-center justify-content-center">
-                                <i class="icon-quote-left"></i>
-                            </span>
-                            </div>
-                            <div class="text ml-md-4">
-                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                            <p class="name">Dennis Green</p>
-                            <span class="position">Guest from London</span>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="item">
-                        <div class="testimony-wrap d-flex">
-                            <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_3.jpg' %})">
-                            <span class="quote d-flex align-items-center justify-content-center">
-                                <i class="icon-quote-left"></i>
-                            </span>
-                            </div>
-                            <div class="text ml-md-4">
-                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                            <p class="name">Dennis Green</p>
-                            <span class="position">Guest from Philippines</span>
+                            <div class="testimony-wrap d-flex">
+                                {% if i.file_path %}
+                                    <div class="user-img mb-5" style="background-image: url(/media/{{i.file_path}})">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>                                    
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="text ml-md-4">
+                                    
+                                        {{i.content|safe}}
+                                    
+                                        <p class="name">{{i.title}}</p>
+                                        <span class="position">{{i.subtitle}}</span>
+                                    </div>
+                                {% else %}
+                                    <div class="user-img">
+                                        <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px">
+                                            <i class="icon-quote-left"></i>                                    
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="text ml-md-6">
+                                    
+                                        {{i.content|safe}}
+                                    
+                                        <p class="name">{{i.title|safe}}</p>
+                                        <span class="position">{{i.subtitle}}</span>
+                                    </div>
+                                    <div class="user-img" >
+                                        <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px">
+                                            <i class="icon-quote-right"></i>                                    
+                                        </span>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
+                    {% endfor %}
+
+                    <!-- <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_2.jpg' %})">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                            <i class="icon-quote-left"></i>
+                        </span>
+                        </div>
+                        <div class="text ml-md-4">
+                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Guest from London</span>
                         </div>
                     </div>
                     </div>
+                    <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_3.jpg' %})">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                            <i class="icon-quote-left"></i>
+                        </span>
+                        </div>
+                        <div class="text ml-md-4">
+                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Guest from Philippines</span>
+                        </div>
+                    </div>
+                    </div> -->
+                </div>
                 </div>
             </div>
-        </div>
-        </div>
-    </section>
+        
+    </div>           
 {% endblock %}
 
 {% block calendar %}    
@@ -649,6 +679,35 @@
             </div>
         </div>
     </section>    
+{% endblock %}
+
+{% block location %}        
+    <section class="ftco-section-parallax">
+        <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+            <div class="col-md-10 text-center heading-section heading-section-white ftco-animate">
+                {% for i in location %}
+                    <h2>{{i.title|safe}}</h2>
+                    {{i.subtitle}}
+                {% endfor %}
+
+                <div class="row d-flex justify-content-center mt-5">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3946.1989486323905!2d116.05216899999998!3d-8.480027000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjgnNDguMSJTIDExNsKwMDMnMDcuOCJF!5e0!3m2!1sid!2sid!4v1677367144831!5m2!1sid!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- <div class="col-md-8">
+                    <form action="#" class="subscribe-form">
+                    <div class="form-group d-flex">
+                        <input type="text" class="form-control" placeholder="Enter email address">
+                        <input type="submit" value="Subscribe" class="submit px-3">
+                    </div>
+                    </form>
+                </div> -->
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block article %}
