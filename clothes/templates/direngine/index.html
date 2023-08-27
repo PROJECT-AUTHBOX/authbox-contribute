@@ -4,9 +4,9 @@
 {% block hero-image %}
     {% for i in slideshow %}        
         <div class="slider-item" style="background-image: url('/media/{{i.file_path}}')">
-            <div class="title" style="display:none">{{i.title}}</div>
-            <div class="sub-title" style="display:none">{{i.sub_title}}</div>
-            <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
+            <div class="title" style="display:none">{{i.title|truncatewords_html:3}}</div>
+            <div class="sub-title" style="display:none">{{i.sub_title|truncatewords_html:3}}</div>
+            <div class="content" style="display:none">&nbsp;{{i.content|truncatewords_html:7|safe}}</div>
         </div>
     {% endfor %}
 <!--     
@@ -26,8 +26,6 @@
 
     <!-- <div id="slider" class="slider"> hero-wrap js-fullheight-->
     <div  id="slider" class="slider">
-
-
         <!-- <div class="overlay"></div>
         <div class="container"> -->
         
@@ -81,8 +79,10 @@
                             </div>
                             <input type="submit" class="search-submit btn btn-primary" value="Search">  
                             </form> -->
-                            <!-- <input type="button" class="search-submit btn btn-primary" onclick="mylinkfunction(self,'#about')" value=" &nbsp; Read More &nbsp; ">   -->
-                            <a href="#about" class="search-submit btn btn-primary"> &nbsp; Read More &nbsp; </a>
+                            <!-- <input type="button" class="search-submit btn btn-primary" onclick="mylinkfunction(self,'#about')" value=" &nbsp; Read More &nbsp; ">   
+                                search-submit 
+                            -->
+                            <a href="#fasilities" class="btn btn-primary"> &nbsp; Read More &nbsp; </a>
                             <!-- <a href="#" class="nav-link"><span>Add listing</span></a> -->
                         <!-- </div> -->
                         <!-- <p>Or browse the highlights</p>
@@ -116,8 +116,8 @@
                         <div class="d-flex justify-content-center"><div class="icon">
                             <span class="{{i.icon}}"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                        <h3 class="heading mb-3">{{i.title}}</h3>
-                        <p>{{i.description}}</p>
+                        <h3 class="heading mb-3">{{i.title|truncatewords_html:3}}</h3>
+                        <p>{{i.description|truncatewords_html:7}}</p>
                         </div>
                     </div>      
                 </div>
@@ -172,7 +172,7 @@
                 <div class="row justify-content-center mb-5 ">
                     <div class="col-md-12">
                         
-                        {{i.content|safe}}
+                        {{i.content|truncatewords_html:15|safe}}
                     
                     </div>
                 </div>
@@ -199,7 +199,10 @@
                                         
                                         <div class="text p-3">
                                             <h3><a href="#">{{i.title}}</a></h3>
-                                            <span class="listing">{{i.content|safe}}</span>
+                                            <span class="listing">{{i.content|truncatewords_html:15|safe}}
+
+                                                <a href="#">Read More</a>
+                                            </span>
                                         </div>
                                     
                                     </div>
@@ -309,7 +312,7 @@
                 <div class="row justify-content-center mb-5 ">
                     <div class="col-md-12">
                         <p>
-                            {{i.content|safe}}
+                            {{i.content|truncatewords_html:15|safe}}
                         </p>
                     </div>
                 </div>
@@ -331,7 +334,11 @@
                                         </a>
                                         <div class="text p-3">
                                             <h3><a href="#">{{i.title}}</a></h3>
-                                            <span class="listing">{{i.content|safe}}</span>
+                                            <span class="listing">{{i.content|truncatewords_html:15|safe}}
+
+                                                <a href="#">Read More</a>
+                                            </span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -415,16 +422,24 @@
 
     <section class="ftco-section" id="offers">
         <div class="container">
-            <div class="row justify-content-start mb-5 pb-3">
+            <div class="row justify-content-start  "> <!--mb-5 pb-3-->
                 {% for i in offers|slice:":1" %}
                     <div class="col-md-7 heading-section ftco-animate">
                         <span class="subheading">{{i.title}}</span>
                         <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
                     </div>
+                    <div class="row justify-content-center mb-5" style="padding:0 15px 0 15px">
+                        <div class="col-md-12" >
+                            <p>
+                                {{i.content|truncatewords_html:15|safe}}
+                                <a href="#" class="">View all offers</a>
+                            </p>                            
+                        </div>                                                
+                    </div>
                 {% endfor %}
             </div>    		
             <div class="row">
-                {% for i in offers|slice:"1:" %}
+                {% for i in offers|slice:"1:5" %}
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="destination">
                             <a href="/media/{{i.file_path}}" class="img img-2 d-flex justify-content-center align-items-center image-popup-no-margins" 
@@ -446,7 +461,7 @@
                                     <span>8 Rating</span>
                                 </p>
                                 <!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
-                                <p>{{i.content|safe}}</p>
+                                <p>{{i.content|truncatewords_html:15|safe}}</p>
                                 <hr>
                                 <p class="bottom-area d-flex">
                                     <span><i class="icon-map-o"></i> </span> 
@@ -456,6 +471,7 @@
                         </div>
                     </div>
                 {% endfor %}
+                
 
                 <!-- <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="destination">
@@ -536,6 +552,8 @@
                     </div>
                 </div> -->
             </div>
+
+       
         </div>
     </section>
 {% endblock %}
@@ -575,7 +593,7 @@
                                     
                                     <div class="text ml-md-4">
                                     
-                                        {{i.content|safe}}
+                                        {{i.content|truncatewords_html:50|safe}}
                                     
                                         <p class="name">{{i.title}}</p>
                                         <span class="position">{{i.subtitle}}</span>
@@ -589,7 +607,7 @@
                                     
                                     <div class="text ml-md-6">
                                     
-                                        {{i.content|safe}}
+                                        {{i.content|truncatewords_html:50|safe}}
                                     
                                         <p class="name">{{i.title|safe}}</p>
                                         <span class="position">{{i.subtitle}}</span>
@@ -715,29 +733,43 @@
     <!-- article -->
     <section class="ftco-section bg-light"> 
     <div class="container">
-    <div class="row justify-content-start mb-5 pb-3">
-        <div class="col-md-7 heading-section ftco-animate">
-        <span class="subheading">Recent Blog</span>
-        <h2><strong>Tips</strong> &amp; Articles</h2>
-        </div>
+    <div class="row justify-content-start mb-4">        
+        {% for i in article|slice:":1" %}
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">{{i.title|truncatewords_html:3|safe}}</span>
+                <h2>{{i.title|truncatewords_html:3|safe}}</h2>
+            </div>
+            <div class="row justify-content-center " style="padding:0 15px 0 15px">
+                <div class="col-md-12" >
+                    <p>
+                        {{i.content|truncatewords_html:15|safe}}
+                        <a href="#" class="">View all article</a>
+                    </p>                    
+                </div>                                
+            </div>
+        {% endfor %}
     </div>
     <div class="row d-flex">
-        <div class="col-md-3 d-flex ftco-animate">
-        <div class="blog-entry align-self-stretch">
-            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'direngine/images/image_1.jpg' %});">
-            </a>
-            <div class="text p-4 d-block">
-                <span class="tag">Tips, Travel</span>
-            <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
-            <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+        {% for i in article|slice:"1:5" %}
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="#" class="block-20" 
+                        style="background-image: url(/media/{{i.file_path}});">
+                    </a>
+                    <div class="text p-4 d-block">
+                        <span class="tag">{{i.categories}}</span>
+                    <h3 class="heading mt-3"><a href="#">{{i.title}}</a></h3>
+                    <div class="meta mb-3">
+                        <div><a href="#">{{i.created_at}}</a></div>
+                        <div><a href="#">{{i.admin}}</a></div>
+                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{i.view_count}}</a></div>
+                    </div>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
+        {% endfor %}
+
+        <!-- <div class="col-md-3 d-flex ftco-animate">
         <div class="blog-entry align-self-stretch">
             <a href="blog-single.html" class="block-20" style="background-image: url({% static 'direngine/images/image_2.jpg' %});">
             </a>
@@ -781,7 +813,7 @@
             </div>
             </div>
         </div>
-        </div>
+        </div> -->
     </div>
     </div>
     </section>
