@@ -3,8 +3,10 @@
 
 {% block content %}
    
-    {% block hero-image %}{% endblock %}
-    {% block detail %}{% endblock %}
+    {% if content_detail %}
+        {% block hero-image %}{% endblock %}
+        {% block detail %}{% endblock %}
+    {% endif %}    
 
    
 {% endblock %}
