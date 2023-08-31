@@ -20,11 +20,20 @@
 {% endblock %}
 
 {% block detail %}    
+	random_model {{random_model}} <br>
+	latest_kind {{latest_kind}} <br>
+	random_paint {{random_paint}} <br>
+	categories_list {{categories_list}} <br>
+	tags_list {{tags_list}} <br>
+	
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
-        	<div class="col-lg-3 sidebar">
-                {% for i in offers %}
+        	<div class="col-lg-3 sidebar">				
+                {% for i in random_paint|slice:"1:" %}
+					{% if forloop.first %}
+					<h3>{{i.title}}</h3>
+					{% else %}
         		    <div class="sidebar-wrap bg-light ftco-animate">
                     
         			    <h3 class="heading mb-4">{{i.title}}</h3>
@@ -74,6 +83,7 @@
                         </div>
                     </form> -->
         		    </div>
+					{% endif %}
                 {% endfor %}
 
         		<!-- <div class="sidebar-wrap bg-light ftco-animate">
