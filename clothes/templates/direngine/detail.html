@@ -10,7 +10,7 @@
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
                 <span class="mr-2"><a href="/">Home</a></span> 
-                <span class="mr-2"><a href="/">{{content_detail.title}}</a></span> <span>Detail</span></p>
+                <span class="mr-2"><a href="/">{{kind}}</a></span> <span>Detail</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{content_detail.title}}</h1>
           </div>
         </div>
@@ -19,108 +19,65 @@
     
 {% endblock %}
 
-{% block detail %}    
-	random_model {{random_model}} <br>
-	latest_kind {{latest_kind}} <br>
-	random_paint {{random_paint}} <br>
-	categories_list {{categories_list}} <br>
-	tags_list {{tags_list}} <br>
-	
+{% block detail %}   
+	{% comment %}
+		random_model 
+		{% for i in random_model %}
+			{{i.title}}; 
+		{% endfor %}
+		<br>
+		
+		latest_kind: 
+		{% for i in latest_kind %}
+			{{i.title}}; 
+		{% endfor %}
+		<br>
+
+		random_paint 
+		{{random_paint}}<br>
+		{% for i in random_paint %}
+			{{i.title}}; 
+		{% endfor %}
+		<br>
+
+		categories_list {{categories_list}} <br>
+		tags_list {{tags_list}} <br>
+
+	{% endcomment %}
+
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
         	<div class="col-lg-3 sidebar">				
-                {% for i in random_paint|slice:"1:" %}
+                {% for i in random_paint %}
 					{% if forloop.first %}
-					<h3>{{i.title}}</h3>
+						<h3 class="heading mb-4 mt-4">{{i.title|safe}}</h3>
 					{% else %}
-        		    <div class="sidebar-wrap bg-light ftco-animate">
-                    
-        			    <h3 class="heading mb-4">{{i.title}}</h3>
-                        <img class="mb-4" src="/media/{{i.file_path}}" width="100%">
-                        
-                        {{i.content|truncatewords_html:20|safe}}
-                        <a href="#">Read More</a>
-                
-                    
-                        <!-- <form action="#">
-                            <div class="fields">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Destination, City">
-                        </div>
-                        <div class="form-group">
-                            <div class="select-wrap one-third">
-                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                            <select name="" id="" class="form-control" placeholder="Keyword search">
-                            <option value="">Select Location</option>
-                            <option value="">San Francisco USA</option>
-                            <option value="">Berlin Germany</option>
-                            <option value="">Lodon United Kingdom</option>
-                            <option value="">Paris Italy</option>
-                            </select>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="checkin_date" class="form-control" placeholder="Date from">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="checkin_date" class="form-control" placeholder="Date to">
-                        </div>
-                        <div class="form-group">
-                            <div class="range-slider">
-                                <span>
-                                                <input type="number" value="25000" min="0" max="120000"/>	-
-                                                <input type="number" value="50000" min="0" max="120000"/>
-                                            </span>
-                                            <input value="1000" min="0" max="120000" step="500" type="range"/>
-                                            <input value="50000" min="0" max="120000" step="500" type="range"/>
-                                            </svg>
-                                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
-                        </div>
-                        </div>
-                    </form> -->
-        		    </div>
+						<div class="sidebar-wrap bg-light ftco-animate">
+						
+							<h3 class="heading mb-4">{{i.title|safe}}</h3>
+							<img class="mb-4" src="/media/{{i.file_path}}" width="100%">
+							
+							{{i.content|truncatewords_html:20|safe}}
+							<a href="#">Read More</a>											
+						</div>
 					{% endif %}
                 {% endfor %}
-
-        		<!-- <div class="sidebar-wrap bg-light ftco-animate">
-        			<h3 class="heading mb-4">Star Rating</h3> -->
-        			<!-- <form method="post" class="star-rating">
-							  <div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">
-										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
-									</label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						     </label>
-							  </div>
-							  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-							    </label>
-							  </div>
-							</form> -->
-        		<!-- </div> -->
+        	
+				{% for i in latest_kind %}
+					{% if forloop.first %}
+						<h3 class="heading mb-4">{{i.title|safe}}</h3>
+					{% else %}
+						<div class="sidebar-wrap bg-light ftco-animate">
+						
+							<h3 class="heading mb-4">{{i.title|safe}}</h3>
+							<img class="mb-4" src="/media/{{i.file_path}}" width="100%">
+							
+							{{i.content|truncatewords_html:20|safe}}
+							<a href="#">Read More</a>											
+						</div>
+					{% endif %}
+				{% endfor %}        		
           </div>
           <div class="col-lg-9">
           	<div class="row">
@@ -180,104 +137,48 @@
 		              </figure>
 		            </div>
           		</div> -->
-          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-                    
-                    {% for i in fasilities|slice:":1" %}
-          			    <h4 class="mb-4">{{i.title}}</h4>
-                    {% endfor %}
-          			<div class="row">
-                            {% for i in fasilities|slice:"1:4" %}
-          				        <div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="#" class="img img-2" 
-                                        style="background-image: url(/media/{{i.file_path}});"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">{{i.title}}</a></h3>
-						    						<!-- <p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p> -->
-					    						</div>
-					    						<!-- <div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div> -->
-				    						</div>
-				    						<!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
-                                            {{i.content|truncatewords_html:20|safe}} <a href="#">Read More</a>
-				    						<!-- <hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p> -->
-				    					</div>
-				    				</div>
-				    			</div>
-                            {% endfor %}
-				    			<!-- <div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-5.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-6.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div> -->
-          			</div>
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">                    
+						{% for i in random_model %}
+							{% if forloop.first %}
+								<h4 class="mb-4">{{i.title|safe}}</h4>
+								<div class="row"> <!--tag buka-->							
+							{% else %}                              									
+								<div class="col-md-4">
+									<div class="destination">
+										<a href="#" class="img img-2" 
+										style="background-image: url(/media/{{i.file_path}});"></a>
+										<div class="text p-3">
+											<div class="d-flex">
+												<div class="one">
+													<h3><a href="hotel-single.html">{{i.title|safe}}</a></h3>
+													<!-- <p class="rate">
+														<i class="icon-star"></i>
+														<i class="icon-star"></i>
+														<i class="icon-star"></i>
+														<i class="icon-star"></i>
+														<i class="icon-star-o"></i>
+														<span>8 Rating</span>
+													</p> -->
+												</div>
+												<!-- <div class="two">
+													<span class="price per-price">$40<br><small>/night</small></span>
+												</div> -->
+											</div>
+											<!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
+											{{i.content|truncatewords_html:20|safe}} <a href="#">Read More</a>
+											<!-- <hr>
+											<p class="bottom-area d-flex">
+												<span><i class="icon-map-o"></i> Miami, Fl</span> 
+												<span class="ml-auto"><a href="#">Book Now</a></span>
+											</p> -->
+										</div>
+									</div>
+								</div>
+												
+							{% endif %}
+						{% endfor %}
+						</div>		<!--tag tutup-->		    			
+          			
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
           			<h4 class="mb-5">Check Availability &amp; Booking</h4>

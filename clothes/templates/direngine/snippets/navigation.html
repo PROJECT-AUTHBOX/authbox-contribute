@@ -12,10 +12,14 @@
             {% for n in my_menu %}                                    
                 {% if n.haveChild %}
                     <li class="nav-item">
-                        <a href="{{n.link}}" class="nav-link"><i class="fa {{n.icon}}"></i> {{n.name}}</a>
+                        <a href="{% if pagetype == 'index' %}{{n.link}}{% else %}/{{request.LANGUAGE_CODE}}/{{n.link}}{% endif %}" 
+                            class="nav-link"><i class="fa {{n.icon}}"></i> {{n.name}}</a>
                         <!-- <ul class="sub-menu"> {{base_url}}-->
                 {% else %}                                                                        
-                    <li class="nav-item"><a href="{{n.link}}" class="nav-link">{% if n.icon %}<i class="fa {{n.icon}}"></i>{% endif %} {{n.name}}</a></li>
+                    <li class="nav-item">
+                        <a href="{% if pagetype == 'index' %}{{n.link}}{% else %}/{{request.LANGUAGE_CODE}}/{{n.link}}{% endif %}" 
+                            class="nav-link">{% if n.icon %}<i class="fa {{n.icon}}"></i>{% endif %} {{n.name}}</a>
+                    </li>
                 {% endif %}
 
                 {% for i in n.haveChildEndTag %}                                        
@@ -31,7 +35,9 @@
                     {% endif %}       
                 {% endfor %}     
             {% endfor %}
-
+                        
+            <!-- LANGUAGE_CODE{{request.LANGUAGE_CODE}}  -->
+            
             <!-- <li class="nav-item active"><a href="#home" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
             <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
