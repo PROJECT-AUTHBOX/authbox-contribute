@@ -4,9 +4,9 @@
 {% block hero-image %}
     {% for i in slideshow %}        
         <div class="slider-item" style="background-image: url('/media/{{i.file_path}}')">
-            <div class="title" style="display:none">{{i.title|truncatewords_html:3}}</div>
-            <div class="sub-title" style="display:none">{{i.sub_title|truncatewords_html:3}}</div>
-            <div class="content" style="display:none">&nbsp;{{i.content|truncatewords_html:7|safe}}</div>
+            <div class="title" style="display:none">{{i.title|safe}}</div>
+            <div class="sub-title" style="display:none">{{i.sub_title|safe}}</div>
+            <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
         </div>
     {% endfor %}
 <!--     
@@ -109,15 +109,15 @@
         <div class="container">
         <div class="row d-flex">
             
-            {% for i in whyus %}
+            {% for i in whyus|slice:":4" %}
                 <div class="col-md-3 d-flex align-self-stretch ftco-animate">
                     <div class="media services block-6 d-block text-center"> 
                         <!--  -->
                         <div class="d-flex justify-content-center"><div class="icon">
                             <span class="{{i.icon}}"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                        <h3 class="heading mb-3">{{i.title|truncatewords_html:3}}</h3>
-                        <p>{{i.description|truncatewords_html:7}}</p>
+                        <h3 class="heading mb-3">{{i.title|truncatewords_html:3|safe}}</h3>
+                        <p>{{i.description|truncatewords_html:7|safe}}</p>
                         </div>
                     </div>      
                 </div>
@@ -164,16 +164,14 @@
                 
                 <div class="row justify-content-start ">
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">{{i.title}}</span>
-                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
-                    
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>                    
                     </div>    
                 </div>
                 <div class="row justify-content-center mb-5 ">
-                    <div class="col-md-12">
-                        
-                        {{i.content|truncatewords_html:15|safe}}
-                    
+                    <div class="col-md-12">                        
+                        {{i.content|striptags|safe}}    
+                        <a href="/{{request.LANGUAGE_CODE}}/fasilities/list/all"> View all fasilities</a>                
                     </div>
                 </div>
             {% endfor %}
@@ -199,8 +197,8 @@
                                         
                                         <div class="text p-3">
                                             <h3><a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">{{i.title}}</a></h3>
-                                            <span class="listing">{{i.content|truncatewords_html:15|safe}}
-
+                                            <span class="listing">
+                                                {{i.content|striptags|truncatewords:15}}
                                                 <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">Read More</a>
                                             </span>
                                         </div>
@@ -302,18 +300,15 @@
             {% for i in photogallery|slice:":1" %}
                 <div class="row justify-content-start ">
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">{{i.title}}</span>
-                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
-                    
-                    </div>
-                
-
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>                    
+                    </div>                
                 </div>
                 <div class="row justify-content-center mb-5 ">
                     <div class="col-md-12">
-                        <p>
-                            {{i.content|truncatewords_html:15|safe}}
-                        </p>
+                        
+                        {{i.content|striptags|safe}}
+                        <a href="/{{request.LANGUAGE_CODE}}/photogallery/list/all"> View all gallery</a>                
                     </div>
                 </div>
             {% endfor %}
@@ -334,7 +329,8 @@
                                         </a>
                                         <div class="text p-3">
                                             <h3><a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">{{i.title}}</a></h3>
-                                            <span class="listing">{{i.content|truncatewords_html:15|safe}}
+                                            <span class="listing">
+                                                {{i.content|striptags|truncatewords:15}}
 
                                                 <a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">Read More</a>
                                             </span>
@@ -425,15 +421,13 @@
             <div class="row justify-content-start  "> <!--mb-5 pb-3-->
                 {% for i in offers|slice:":1" %}
                     <div class="col-md-7 heading-section ftco-animate">
-                        <span class="subheading">{{i.title}}</span>
-                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title}}</h2>
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>
                     </div>
                     <div class="row justify-content-center mb-5" style="padding:0 15px 0 15px">
                         <div class="col-md-12" >
-                            <p>
-                                {{i.content|truncatewords_html:15|safe}}
-                                <a href="#" class="">View all offers</a>
-                            </p>                            
+                            {{i.content|striptags|safe}}    
+                        <a href="/{{request.LANGUAGE_CODE}}/offers/list/all"> View all offers</a>                                            
                         </div>                                                
                     </div>
                 {% endfor %}
@@ -461,7 +455,8 @@
                                     <span>8 Rating</span>
                                 </p>
                                 <!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
-                                <p>{{i.content|truncatewords_html:15|safe}}</p>
+                                {{i.content|striptags|truncatewords:15|safe}}
+                                <a href="/{{request.LANGUAGE_CODE}}/offers/detail/{{i.slug}}">Read More</a>
                                 <hr>
                                 <p class="bottom-area d-flex">
                                     <span><i class="icon-map-o"></i> </span> 
@@ -565,7 +560,7 @@
             <h2 class="mb-4 pb-3">{{i.title|safe}}</h2>
             <!-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p> -->
-            {{i.content|safe}}
+            <p>{{i.content|striptags|truncatewords:30}}</p>
             <a href="/{{request.LANGUAGE_CODE}}/aboutus/detail/{{i.slug}}" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3" style="margin-left:0px">Read more</a>
         {% endfor %}
     </div>
@@ -574,8 +569,12 @@
 {% block testimony %}
     <div class="col-md-6 heading-section ftco-animate">
         {% for i in testimony|slice:":1" %}
-            <span class="subheading">{{i.subtitle}}</span>
-            <h2 class="mb-4 pb-3">{{i.title|safe}}</h2>
+            <span class="subheading">{{i.subtitle}} 
+                ><a href="/{{request.LANGUAGE_CODE}}/testimony/list/all"> View all testimony</a>
+            </span>
+            <h2 class="mb-4 pb-3">{{i.title|safe}}                 
+            </h2>
+            
         {% endfor %}
 
             <div class="row ftco-animate">
@@ -593,7 +592,7 @@
                                     
                                     <div class="text ml-md-4">
                                     
-                                        {{i.content|truncatewords_html:50|safe}}
+                                        {{i.content|striptags|truncatewords:15}}
                                     
                                         <p class="name">{{i.title}}</p>
                                         <span class="position">{{i.subtitle}}</span>
@@ -607,7 +606,7 @@
                                     
                                     <div class="text ml-md-6">
                                     
-                                        {{i.content|truncatewords_html:50|safe}}
+                                        {{i.content|striptags|truncatewords:15}}
                                     
                                         <p class="name">{{i.title|safe}}</p>
                                         <span class="position">{{i.subtitle}}</span>
@@ -731,19 +730,19 @@
 {% block article %}
     <span id="article">&nbsp;</span>
     <!-- article -->
-    <section class="ftco-section bg-light"> 
+    <section class="ftco-section "> 
     <div class="container">
     <div class="row justify-content-start mb-4">        
         {% for i in article|slice:":1" %}
             <div class="col-md-7 heading-section ftco-animate">
-                <span class="subheading">{{i.title|truncatewords_html:3|safe}}</span>
-                <h2>{{i.title|truncatewords_html:3|safe}}</h2>
+                <span class="subheading">{{i.title|safe}}</span>
+                <h2>{{i.title|safe}}</h2>
             </div>
             <div class="row justify-content-center " style="padding:0 15px 0 15px">
                 <div class="col-md-12" >
                     <p>
-                        {{i.content|truncatewords_html:15|safe}}
-                        <a href="#" class="">View all article</a>
+                        {{i.content|striptags|safe}}
+                        <a href="/{{request.LANGUAGE_CODE}}/article/list/all" class="">View all article</a>
                     </p>                    
                 </div>                                
             </div>
@@ -759,11 +758,12 @@
                     <div class="text p-4 d-block">
                         <span class="tag">{{i.categories}}</span>
                     <h3 class="heading mt-3">
-                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}">{{i.title}}</a></h3>
+                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}">
+                        {{i.title|safe}}</a></h3>
                     <div class="meta mb-3">
-                        <div><a href="#">{{i.created_at}}</a></div>
-                        <div><a href="#">{{i.admin}}</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{i.view_count}}</a></div>
+                        <div><a href="javascript:void(0);">{{i.created_at}}</a></div>
+                        <div><a href="javascript:void(0);">{{i.admin}}</a></div>
+                        <div><a href="javascript:void(0);" class="meta-chat"><span class="icon-star-o"></span> {{i.view_count}}</a></div>
                     </div>
                     </div>
                 </div>
@@ -821,12 +821,7 @@
 {% endblock %}      
 
 {% block extra_body %}
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<span class="fa fa-angle-up"></span>
-		</span>
-	</div>  
+ 
 
     <script>      
         var year_, month_;
@@ -1079,21 +1074,21 @@
             // });
 
             /*[ Back to top ]*/
-            try {
-                var windowH = $(window).height()/2;
+            // try {
+            //     var windowH = $(window).height()/2;
 
-                $(window).on('scroll',function(){
-                    if ($(this).scrollTop() > windowH) {
-                        $("#myBtn").addClass('show-btn-back-to-top');
-                    } else {
-                        $("#myBtn").removeClass('show-btn-back-to-top');
-                    }
-                });
+            //     $(window).on('scroll',function(){
+            //         if ($(this).scrollTop() > windowH) {
+            //             $("#myBtn").addClass('show-btn-back-to-top');
+            //         } else {
+            //             $("#myBtn").removeClass('show-btn-back-to-top');
+            //         }
+            //     });
 
-                $('#myBtn').on("click", function(){
-                    $('html, body').animate({scrollTop: 0}, 300);
-                });
-            } catch(er) {console.log(er);}
+            //     $('#myBtn').on("click", function(){
+            //         $('html, body').animate({scrollTop: 0}, 300);
+            //     });
+            // } catch(er) {console.log(er);}
 
             window.onscroll = function() {myFunction()};
 

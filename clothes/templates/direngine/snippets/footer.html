@@ -28,7 +28,7 @@
             <h2 class="ftco-heading-2">Information</h2>
             <ul class="list-unstyled">
               {% for i in menu_footer1 %}
-                <li><a href="{{base_url}}{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
+                <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Service</a></li> -->
               <!-- <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li> -->
@@ -43,7 +43,7 @@
             <h2 class="ftco-heading-2">Customer Support</h2>
             <ul class="list-unstyled">
               {% for i in menu_footer2 %}
-                <li><a href="{{base_url}}{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
+                <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li> -->
               <!-- <li><a href="#" class="py-2 d-block">Booking Tips</a></li> -->
