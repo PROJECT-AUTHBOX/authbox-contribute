@@ -64,7 +64,7 @@
                     <li><a href="tel:{{phone}}" title="Make a phone call"><span class="icon icon-phone"></span><span class="text">{{phone|phone_number}}</span></a></li>
                   {% endif %}
                   {% if whatsapp %} 
-                    <li><a href="javascript:void(0);" title="Send text via whatsapp" onclick="openWA('{{phone}}', 'I contact you through the website. I have few questions ...');"><span class="icon icon-whatsapp"></span><span class="text">{{whatsapp|phone_number}}</span></a></li>
+                    <li><a href="javascript:void(0);" title="Send text via whatsapp" onclick="openWA('{{whatsapp}}', 'I contact you through the website. I have few questions ...');"><span class="icon icon-whatsapp"></span><span class="text">{{whatsapp|phone_number}}</span></a></li>
                   {% endif %}
                   {% if fax %} 
                     <li><a href="fax:{{fax}}" title="Send text via Facsimile"><span class="icon icon-fax"></span><span class="text">{{fax|phone_number}}</span></a></li>
