@@ -37,7 +37,8 @@
         <div class="sub-title" style="display:none">&nbsp; &nbsp; A CREATIVE AGENCY &nbsp; &nbsp;</div>
         <div class="content" style="display:none">Click button below.</div>
     </div> -->
-    <!-- <span id="div-slideshow">&nbsp;</span> -->
+    <span id="home-scroll"></span>
+
     <div  id="slider" class="slider">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">            
             <div class="slider-panel">
@@ -70,7 +71,7 @@
                             <h1 class="banner-title title">We craft seo and digital markting services</h1>
                             <p class="content">We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.</p>
                                 
-                            <a href="#div-howitworks" class="btn btn-white btn-circled nav-link smoth-scroll">Mulai Sekarang</a>
+                            <a href="#howitworks-scroll" class="btn btn-white btn-circled nav-link smoth-scroll">Mulai Sekarang</a>
                             </div>
                         </div>
                         </div>
@@ -110,7 +111,7 @@
     <!--  ABOUT AREA START  -->
     {% get_current_language as CURRENT_LANGUAGE %}
     
-    <span id="div-howitworks">&nbsp;</span>
+    <span id="howitworks-scroll"></span>
     <section id="intro" class="section-padding">
         <div class="container">
         <div class="row">
@@ -170,7 +171,7 @@
                 <div class="intro-cta">
                     <!-- Still have any question on mind ?  -->
                     <p class="lead ">Jika Ada yang perlu ditanyakan ?
-                        <a href="#div-footer" class="nav-link smoth-scroll" style="display: inline; padding: 0px;"> Hubungi Kami</a>
+                        <a href="#footer-scroll" class="nav-link smoth-scroll" style="display: inline; padding: 0px;"> Hubungi Kami</a>
                     </p>
                 </div>
                 </div>
@@ -235,13 +236,13 @@
                 <div class="col-lg-4 col-sm-6 col-md-6">
                     <div class="service-box">
                         <div class="service-img-icon">
-                        <a href="{{base_url}}/fasilities/detail/{{i.slug}}"><img src="/media/{{i.file_path}}" alt="service-icon" class="img-fluid" style="border-radius: 50%;"></a>
+                        <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}"><img src="/media/{{i.file_path}}" alt="service-icon" class="img-fluid" style="border-radius: 50%;"></a>
                         </div>
                         <div class="service-inner">
-                        <a href="{{base_url}}/fasilities/detail/{{i.slug}}"><h4>{{i.title}}</h4></a>
+                        <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}"><h4>{{i.title}}</h4></a>
                         <!-- <p>Reach a huge area of users and get a publicty of your product and service ,<span>video marketing</span>
                             solution.</p> -->
-                        {{i.content|safe|truncatewords:20}} <a href="{{base_url}}/fasilities/detail/{{i.slug}}">lebih lanjut</a>
+                        {{i.content|safe|truncatewords:20}} <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">lebih lanjut</a>
                         </div>
                     </div>
                 </div>
@@ -434,13 +435,13 @@
             {% for i in article|slice:"1:" %}
                 <div class="col-lg-4 col-sm-6 col-md-4">
                 <div class="blog-block ">
-                    <a href="{{base_url}}/article/detail/{{i.slug}}"><img src="/media/{{i.file_path}}" alt="" class="w-100"></a>
+                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}"><img src="/media/{{i.file_path}}" alt="" class="w-100"></a>
                     <div class="blog-text">
-                    <h6 class="author-name"><span><a href="{{base_url}}/article/detail/{{i.slug}}">{{i.categories}}</a></span>{{i.admin}}</h6>
-                    <a href="{{base_url}}/article/detail/{{i.slug}}" class="h5 my-2 d-inline-block">
+                    <h6 class="author-name"><span><a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}">{{i.categories}}</a></span>{{i.admin}}</h6>
+                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}" class="h5 my-2 d-inline-block">
                         {{i.title}}
                     </a>
-                    {{i.content|safe|truncatewords:20}} <a href="{{base_url}}/article/detail/{{i.slug}}">lebih lanjut</a>
+                    {{i.content|safe|truncatewords:20}} <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}">lebih lanjut</a>
                     <!-- <p>If you want to grow your content quality and standard you should foolow these tips properly voluptatibus.
                     </p> -->
                     </div>

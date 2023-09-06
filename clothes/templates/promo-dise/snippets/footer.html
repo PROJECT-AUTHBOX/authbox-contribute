@@ -3,7 +3,7 @@
 
 
 <!--  FOOTER AREA START  -->
-<span id="div-footer">&nbsp;</span>
+<span id="footer-scroll"></span>
 <section id="footer" class="section-padding">
     <div class="container">
       <div class="row justify-content-around">
@@ -21,7 +21,7 @@
             <ul>
               {% for n in my_menu %}
                 {% if n.haveChild == False %}
-                  <li><a href="{{base_url}}/{{n.link}}" class="nav-link smoth-scroll" style="display: inline; padding: 0px;">{{n.name}}</a></li>
+                  <li><a href="/{{request.LANGUAGE_CODE}}/{{n.link}}" class="nav-link smoth-scroll" style="display: inline; padding: 0px;">{{n.name}}</a></li>
                 {% endif %}
               {% endfor %}
               <!-- <li><a href="#">Landing Page</a></li>
@@ -41,7 +41,7 @@
               {% for n in my_menu_footer %}
                 <!-- sub menu tidak di buat -->
                 {% if n.haveChild == False %}
-                  <li><a href="{{base_url}}/{{n.link}}">{{n.name}}</a></li>
+                  <li><a href="/{{request.LANGUAGE_CODE}}/{{n.link}}">{{n.name}}</a></li>
                 {% endif %}
               {% endfor %}
 
@@ -64,7 +64,8 @@
               <p><span><i class="icofont-phone"></i> Phone :</span> <a href="tel:{{phone}}"> {{phone|phone_number}}</a></p>
             {% endif %}
             {% if whatsapp %}
-              <p><span><i class="icofont-brand-whatsapp"></i> Whatsapp :</span> <a href="javascript:void()" onclick="openWA('{{whatsapp}}')"> {{whatsapp|phone_number}}</a></p>
+              <p><span><i class="icofont-brand-whatsapp"></i> Whatsapp :</span> <a href="javascript:void()" 
+                onclick="openWA('{{whatsapp}}', 'I contact you through the website. I have few questions ...', {{is_mobile|lower}})"> {{whatsapp|phone_number}}</a></p>
             {% endif %}
             {% if address %}
               <p><span><i class="icofont-google-map"></i> Location:</span> {{address}}</p>

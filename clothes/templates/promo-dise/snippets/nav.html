@@ -6,7 +6,7 @@
     <div class="container" style="z-index: 99;">
       
       {% for i in logo|slice:":1" %}
-        <a class="navbar-brand nav-link smoth-scroll" href="{{base_url}}/#slider">
+        <a class="navbar-brand nav-link smoth-scroll" href="/">
           <img src="/media/{{i.file_path}}" alt="{{i.name}}" class="img-fluid b-logo">
         </a>
       {% endfor %}
@@ -28,7 +28,7 @@
               {% if n.haveChild %}
                 <ul class="dropdown-menu" aria-labelledby="navbarWelcome">
               {% else %}                                
-                <a class="nav-link smoth-scroll" href="{{base_url}}/{{n.link}}">
+                <a class="nav-link smoth-scroll" href="/{{request.LANGUAGE_CODE}}/{{n.link}}">
                   {{n.name}}
                 </a>
               {% endif %}
