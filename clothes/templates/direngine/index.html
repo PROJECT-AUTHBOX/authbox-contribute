@@ -10,9 +10,7 @@
         </div>
     {% endfor %}
 <!--     
-    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_2.jpg' %})">
-        
-    
+    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_2.jpg' %})">            
     </div>
     <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_3.jpg' %})"></div>
     <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_4.jpg' %})"></div>
@@ -305,8 +303,7 @@
                     </div>                
                 </div>
                 <div class="row justify-content-center mb-5 ">
-                    <div class="col-md-12">
-                        
+                    <div class="col-md-12">                        
                         {{i.content|striptags|safe}}
                         <a href="/{{request.LANGUAGE_CODE}}/photogallery/list/all"> View all gallery</a>                
                     </div>
@@ -418,8 +415,8 @@
 
     <section class="ftco-section" id="offers">
         <div class="container">
-            <div class="row justify-content-start  "> <!--mb-5 pb-3-->
-                {% for i in offers|slice:":1" %}
+            {% for i in offers|slice:":1" %}
+                <div class="row justify-content-start  "> <!--mb-5 pb-3-->                
                     <div class="col-md-7 heading-section ftco-animate">
                         <span class="subheading">{{i.title|safe}}</span>
                         <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>
@@ -427,11 +424,12 @@
                     <div class="row justify-content-center mb-5" style="padding:0 15px 0 15px">
                         <div class="col-md-12" >
                             {{i.content|striptags|safe}}    
-                        <a href="/{{request.LANGUAGE_CODE}}/offers/list/all"> View all offers</a>                                            
+                            <a href="/{{request.LANGUAGE_CODE}}/offers/list/all"> View all offers</a>                                            
                         </div>                                                
-                    </div>
-                {% endfor %}
-            </div>    		
+                    </div>                
+                </div>    		
+            {% endfor %}
+
             <div class="row">
                 {% for i in offers|slice:"1:5" %}
                     <div class="col-md-6 col-lg-3 ftco-animate">
