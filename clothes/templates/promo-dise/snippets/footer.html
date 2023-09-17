@@ -21,7 +21,7 @@
             <ul>
               {% for n in my_menu %}
                 {% if n.haveChild == False %}
-                  <li><a href="/{{request.LANGUAGE_CODE}}/{{n.link}}" class="nav-link smoth-scroll" style="display: inline; padding: 0px;">{{n.name}}</a></li>
+                  <li><a href="{% if pagetype == 'index' %}{{n.link}}{% else %}/{{request.LANGUAGE_CODE}}/{{n.link}}{% endif %}" class="nav-link smoth-scroll" style="display: inline; padding: 0px;">{{n.name}}</a></li>
                 {% endif %}
               {% endfor %}
               <!-- <li><a href="#">Landing Page</a></li>
@@ -38,11 +38,12 @@
           <div class="footer-widget footer-link">
             <h4>Link Cepat</h4>
             <ul>
-              {% for n in my_menu_footer %}
+              <!-- menu footer 2 tidak ada -->              
+              {% for i in footer_menu_1 %}
                 <!-- sub menu tidak di buat -->
-                {% if n.haveChild == False %}
-                  <li><a href="/{{request.LANGUAGE_CODE}}/{{n.link}}">{{n.name}}</a></li>
-                {% endif %}
+                <!-- Jangan ada sub menu disini karena template tidak support sub menu -->
+                <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}">{{i.name}}</a></li>
+                
               {% endfor %}
 
               <!-- <li><a href="#!">How it Works</a></li>
@@ -77,7 +78,7 @@
         <div class="col-lg-12 text-center">
           <div class="footer-copy">
             <!-- Copyright &copy; 2023, <a href="#slider" class="nav-link smoth-scroll" style="display: inline; padding: 0px;">{{name}}.web.id</a> -->
-            Copyright &copy; 2023, <a href="/" >{{name}}</a> <a href="#" >v{{version}}</a> 
+            Copyright &copy; 2023, <a target="_blank" href="/{{request.LANGUAGE_CODE}}/dashboard" >{{name}}</a> <a href="/{{request.LANGUAGE_CODE}}/pages/detail/changes-log" >v{{version}}</a> 
             
             <!-- Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a> -->
           </div>

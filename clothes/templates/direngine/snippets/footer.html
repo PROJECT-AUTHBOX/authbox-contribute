@@ -27,7 +27,7 @@
             <!-- my_menu_footer{{my_menu_footer}} -->
             <h2 class="ftco-heading-2">Information</h2>
             <ul class="list-unstyled">
-              {% for i in menu_footer1 %}
+              {% for i in footer_menu_1 %}
                 <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Service</a></li> -->
@@ -42,7 +42,7 @@
            <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">Customer Support</h2>
             <ul class="list-unstyled">
-              {% for i in menu_footer2 %}
+              {% for i in footer_menu_2 %}
                 <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li> -->

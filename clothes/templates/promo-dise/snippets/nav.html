@@ -28,7 +28,7 @@
               {% if n.haveChild %}
                 <ul class="dropdown-menu" aria-labelledby="navbarWelcome">
               {% else %}                                
-                <a class="nav-link smoth-scroll" href="/{{request.LANGUAGE_CODE}}/{{n.link}}">
+                <a class="nav-link smoth-scroll" href="{% if pagetype == 'index' %}{{n.link}}{% else %}/{{request.LANGUAGE_CODE}}/{{n.link}}{% endif %}">
                   {{n.name}}
                 </a>
               {% endif %}
