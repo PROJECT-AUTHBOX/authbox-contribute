@@ -339,12 +339,16 @@
                                     <tbody>
                                         <tr>
                                             <td >Name</td>
-                                            <td>
+                                            <td colspan="2">
                                             <!-- <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white"> -->
-                                               {{template.name}}         
+                                               <!-- {{template.name}}    -->
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <select name="template_id" class="select2_template" style="width: 100%; ">
+                                                    </select>      
+                                                </div>
                                             <!-- </a> -->
                                             </td>
-                                            <td></td>
+                                            <!-- <td></td> -->
                                             
                                         </tr>
                                         <tr>
@@ -358,7 +362,7 @@
                                                 
                                             </td>
                                             <td>
-                                                <a href="javascript:void(0);" onclick="fiture_not_ready()" class="btn bg-color-teal txt-color-white">Change Template</a>
+                                                <a href="javascript:void(0);" onclick="fiture_not_ready()" class="btn bg-color-teal txt-color-white">Change</a>
                                             </td>
                                             
                                         </tr>
@@ -886,6 +890,71 @@
 				}
 				e.stopPropagation();
 			});	
+
+            // select 2 change template
+            $('.select2_template').select2({
+                ajax: {
+                    url: '/dashboard/template_lookup_ajax/',
+                    delay: 250, // wait 250 milliseconds before triggering the request
+                    dataType: 'json',
+                    data: function (params) {
+                        var query = {
+                            search: params.term,
+                            page: params.page || 1
+                            // type: 'public'
+                        };
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: (params.page * 10) < data.count_filtered
+                            }
+                        };
+                    },
+                },
+                theme: 'bootstrap4',
+                // placeholder: "Pilih Kategori",
+                allowClear: true,
+            });
+
+            $('.select2_template').on('select2:open', () => {
+                this.querySelector('.select2-search__field').focus();
+            });
+
+            $('.select2_category').on('select2:select', function (e) {
+                var data = e.params.data;
+                alert(data);
+                // kategori_id = data.id;
+
+                // kontribusi_kualitas(kategori_id);     
+                
+                // kontribusi_kuantitas(kategori_id);     
+
+                // //console.log('datatable exists', $('#id_kontribusi_kuantitas_table').DataTable());
+                // if (!is_first_enter) {
+                //     //console.log('reload');
+                //     $('#id_kontribusi_kuantitas_table').DataTable().ajax.url("/dashboard/site_kontribusi_kuantitas_table_ajax/" + kategori_id).load();            
+                //     $('#id_kontribusi_kualitas_table').DataTable().ajax.url("/dashboard/site_kontribusi_kualitas_table_ajax/" + kategori_id).load();            
+                // }
+                // else {
+                //     //console.log('create');
+                //     is_first_enter = !is_first_enter
+                //     kontribusi_kuantitas_table(kategori_id);        
+                //     kontribusi_kualitas_table(kategori_id);        
+                // };
+            });
+
+            //$(".select2_category").select2("trigger", "select", {
+                //data: { id: {{form_provinsi.id}}, text: {{form_provinsi.name}} }    
+               // alert("sele");
+                // data : instansi_kategori_id_data        
+           // });    
             
         });                
     </script>
