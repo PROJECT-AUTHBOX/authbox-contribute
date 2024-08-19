@@ -127,7 +127,8 @@
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>    -->
 
 <!-- ADD Custom js -->
-<script src="{% static 'js/custom.js' %}"></script>  
+<!-- Tambah version agar client langsung update cache browser -->
+<script src="{% static 'js/custom.js' %}?version=1.0.0"></script>  
 <script src="{% static 'smart-admin-2/js/cropper.min.js' %}"></script>  
 
 <!-- <script src="{% static 'django_ckeditor_5/app.js' %}"></script>   -->

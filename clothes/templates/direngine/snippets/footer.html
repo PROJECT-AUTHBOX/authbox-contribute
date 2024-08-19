@@ -25,9 +25,13 @@
         <div class="col-md">
           <div class="ftco-footer-widget mb-4 ml-md-5">
             <!-- my_menu_footer{{my_menu_footer}} -->
-            <h2 class="ftco-heading-2">Information</h2>
+            <h2 class="ftco-heading-2">
+              {% for i in footer_menu_1|slice:":1" %}
+                {{i.name}}
+              {% endfor %}
+            </h2>
             <ul class="list-unstyled">
-              {% for i in footer_menu_1 %}
+              {% for i in footer_menu_1|slice:"1:" %}
                 <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Service</a></li> -->
@@ -40,9 +44,13 @@
         </div>
         <div class="col-md">
            <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Customer Support</h2>
+            <h2 class="ftco-heading-2">
+                {% for i in footer_menu_2|slice:":1" %}
+                  {{i.name}}
+                {% endfor %}
+            </h2>
             <ul class="list-unstyled">
-              {% for i in footer_menu_2 %}
+              {% for i in footer_menu_2|slice:"1:" %}
                 <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" class="py-2 d-block">{{i.name}}</a></li>
               {% endfor %}
               <!-- <li><a href="#" class="py-2 d-block">Payment Option</a></li> -->

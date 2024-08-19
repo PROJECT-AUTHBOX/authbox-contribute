@@ -114,13 +114,20 @@
           			</div>
           		</div> -->
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-          			<span>{{content_detail.title|safe}}</span>
-          			<h2>{{content_detail.sub_title|safe}}</h2>
+					{% if content_detail.sub_title %}
+					<span>{{content_detail.sub_title|safe}}</span>
+					{% endif %}
+          			
+					<h2>{{content_detail.title|safe}}</h2>
+					
           			<p class="rate mb-5">
           				<span class="loc"><a href="javascript:void(0);"><i class="icon-chat"></i> 
-                            {{ content_detail.admin.name|default:content_detail.admin }} </a></span>
-                        <span class="loc"><a href="javascript:void(0);"><i class="icon-star-o"></i> 
-                            Reading Time: {{ content_detail.reading_time }} minutes</a></span>
+                            By: {{ content_detail.admin.name|default:content_detail.admin }} </a></span>
+
+						{% if content_detail.reading_time %}
+							<span class="loc"><a href="javascript:void(0);"><i class="icon-star-o"></i> 
+								Reading Time: {{ content_detail.reading_time }} minutes</a></span>
+						{% endif %}
           				<!-- <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
@@ -128,7 +135,7 @@
     							<i class="icon-star"></i>
     							<i class="icon-star-o"></i>
     							8 Rating</span> -->
-    						</p>
+    				</p>
 							<div class="ck-content">
                             	{{content_detail.content|safe}}
 							</div>
@@ -148,8 +155,11 @@
 	    						</ul>
     						</div>
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p> -->
+
+						
           		</div>
-				
+				<hr>
+				<hr>
           		<!-- <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
           			<h4 class="mb-4">Take A Tour</h4>
           			<div class="block-16">

@@ -133,7 +133,11 @@
                         -->
                         <header>
                             <span class="widget-icon"> <i class="fa fa-lg fa-user"></i> </span>
-                            <h2>User Information</h2>
+                            <h2>User Information 
+                                {% for i in service %}
+                                    {{i.name}}
+                                {% endfor %}
+                            </h2>
         
                         </header>
         
@@ -342,10 +346,12 @@
                                             <td colspan="2">
                                             <!-- <a href="javascript:void(0);" class="btn bg-color-teal txt-color-white"> -->
                                                <!-- {{template.name}}    -->
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
                                                     <select name="template_id" class="select2_template" style="width: 100%; ">
                                                     </select>      
-                                                </div>
+                                                    
+                                                    <!-- <input type="text" id="init_template_id" name="init_template_id" value="{{template_init|safe}}"> -->
+                                                <!-- </div> -->
                                             <!-- </a> -->
                                             </td>
                                             <!-- <td></td> -->
@@ -354,15 +360,33 @@
                                         <tr>
                                             <td >Thumbnail</td>
                                             <td>
-                                                {% if template.file_path %}
-                                                    <img src="/media/{{template.file_path}}" width="100%">
-                                                {% else %}
-                                                    No Image
-                                                {% endif %}
-                                                
+                                                <img id="template_photo" src="" width="100%">
+                                                {% comment %}
+                                                    {% if template.file_path %}
+                                                        <img id="template_photo" src="/media/{{template.file_path}}" width="100%">
+                                                        
+                                                    {% else %}
+                                                        No Image
+                                                    {% endif %}
+                                                {% endcomment %}
                                             </td>
                                             <td>
-                                                <a href="javascript:void(0);" onclick="fiture_not_ready()" class="btn bg-color-teal txt-color-white">Change</a>
+                                                <a href="javascript:void(0);" id="template_change" onclick="template_change()" 
+                                                    class="btn bg-color-teal txt-color-white">Change</a>
+                                                          
+                                                    
+                                                    {% for i in agency %}   
+                                                        {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
+                                                            {% for k in j %}
+                                                                {% if k.agency_id == i.id %}
+                                                                    
+                                                                    
+                                                                    <input type="hidden" id="service_id" name="service_id" value="{{k.kind}}">
+                                                                            
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    {% endfor %}
                                             </td>
                                             
                                         </tr>
@@ -776,10 +800,34 @@
 
 {% block extra_body %}
     <script type="text/javascript"> 
+        {% if template_init %}
+            var init_template_id = {{template_init|safe}}; 
+            var template_id = {{template_init.id}}; 
+        {% endif %}
+
 
         function fiture_not_ready() {
             alert('Fiture belum siap!');
         };
+
+        function template_change() {
+            // console.log('template id', $(".select2_template").val());
+            if (confirm('Ubah ke template ini?')) {
+                var template_id2 = $(".select2_template").val();
+                $.ajax({
+                    url: "/dashboard/template_change/" + template_id2, 
+                    success: function(result){   
+                        if (result=="True") {
+                            template_id = template_id2;         
+                            $("#template_change").attr("disabled", true); 
+                            alert('Template telah diubah');
+                        }
+                        else
+                            alert('Template gagal diubah!');
+                    }
+                }); 
+            }
+        }
 
         // Monthly = 4
         // Weekly = 3
@@ -892,9 +940,12 @@
 			});	
 
             // select 2 change template
+            var service_id = $("#service_id").val();
+            console.log('service id', service_id);
+
             $('.select2_template').select2({
                 ajax: {
-                    url: '/dashboard/template_lookup_ajax/',
+                    url: '/dashboard/template_lookup_ajax/' + service_id,
                     delay: 250, // wait 250 milliseconds before triggering the request
                     dataType: 'json',
                     data: function (params) {
@@ -920,16 +971,29 @@
                 },
                 theme: 'bootstrap4',
                 // placeholder: "Pilih Kategori",
-                allowClear: true,
+                // allowClear: true,
             });
 
             $('.select2_template').on('select2:open', () => {
                 this.querySelector('.select2-search__field').focus();
             });
 
-            $('.select2_category').on('select2:select', function (e) {
+            $('.select2_template').on('select2:select', function (e) {
                 var data = e.params.data;
-                alert(data);
+                // alert(data.id);
+
+                if (template_id==data.id) 
+                    $("#template_change").attr("disabled", true);
+                else
+                    $("#template_change").attr("disabled", false);
+
+                $.ajax({
+                    url: "/dashboard/template_photo_ajax/" + data.id, 
+                    success: function(result){              
+                        console.log(result[0]['file_path']);
+                        $("#template_photo").attr("src", '/media/' + result[0]['file_path']);
+                    }
+                }); 
                 // kategori_id = data.id;
 
                 // kontribusi_kualitas(kategori_id);     
@@ -950,11 +1014,14 @@
                 // };
             });
 
-            //$(".select2_category").select2("trigger", "select", {
+            
+            // $("#init_template_id").val();
+            console.log(init_template_id);
+            $(".select2_template").select2("trigger", "select", {
                 //data: { id: {{form_provinsi.id}}, text: {{form_provinsi.name}} }    
                // alert("sele");
-                // data : instansi_kategori_id_data        
-           // });    
+                data : init_template_id
+           });    
             
         });                
     </script>

@@ -21,22 +21,13 @@
     <!-- <meta name="author" content="Themefisher"> -->
     <!-- <meta name="generator" content="Themefisher Promodise Template v1.0"> -->
 
-    <!-- theme meta -->
-    <meta name="theme-name" content="promodise" />
-
-    <meta property="og:title" content="{{title}}" />
-    <meta property="og:type" content="{{og_type}}" />
-    <meta property="og:url" content="http{% if request.is_secure %}s{% endif %}://{{og_url}}" />
-
-    {% for i in logo|slice:":1" %}
-      <meta property="og:image" content="http{% if request.is_secure %}s{% endif %}://{{og_url}}/media/{{i.file_path}}" />
-    {% endfor %}
+       
 
     <!-- <meta property="og:image" content="{{og_image}}" /> description -->
 
-    {% include 'promo-dise/snippets/style.html' %}
-
     {% block extra_head %}{% endblock %}  
+
+    {% include 'promo-dise/snippets/style.html' %}  
 
 </head><body data-spy="scroll" data-target="#mainNav">
 
